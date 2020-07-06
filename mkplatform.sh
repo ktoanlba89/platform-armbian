@@ -17,7 +17,7 @@ CUR_BRANCH=`git rev-parse --abbrev-ref HEAD`
 cd ${C}
 
 case $P in
-'nanopineo' | 'nanopiair')
+'nanopineo' | 'nanopiair' | 'orangepipc' | 'orangepilite' | 'orangepione' )
   PLATFORM="sun8i-h3"
   ;;
 'nanopineo2' | 'nanopineoplus2')
@@ -98,7 +98,7 @@ cd ${A}
 rm -rf ./${A}/output/debs
 
 echo "U-Boot & kernel compile for ${P}"
-./compile.sh KERNEL_ONLY=yes BOARD=${P} BRANCH=${B} LIB_TAG=${V} RELEASE=buster KERNEL_CONFIGURE=no EXTERNAL=yes BUILD_KSRC=no BUILD_DESKTOP=no
+./compile.sh KERNEL_ONLY=yes BOARD=${P} BRANCH=${B} LIB_TAG=${V} RELEASE=jessie KERNEL_CONFIGURE=no EXTERNAL=yes BUILD_KSRC=no BUILD_DESKTOP=no
 
 cd ${C}
 rm -rf ./${P}
@@ -154,7 +154,7 @@ touch ./${P}/boot/.next
 
 echo "Create armbianEnv.txt"
 case $P in
-'nanopineo' | 'nanopiair')
+'nanopineo' | 'nanopiair' | 'orangepipc' | 'orangepilite' | 'orangepione' )
   echo "verbosity=1
 logo=disabled
 console=serial
@@ -163,7 +163,7 @@ overlay_prefix=sun8i-h3
 overlays=i2c0 analog-codec
 rootdev=/dev/mmcblk0p2
 rootfstype=ext4
-user_overlays=sun8i-h3-i2s0-slave
+user_overlays=sun8i-h3-i2s0-master
 usbstoragequirks=0x2537:0x1066:u,0x2537:0x1068:u
 extraargs=imgpart=/dev/mmcblk0p2 imgfile=/volumio_current.sqsh" >> ./${P}/boot/armbianEnv.txt
   ;;
