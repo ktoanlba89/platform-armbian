@@ -193,5 +193,11 @@ extraargs=imgpart=/dev/mmcblk0p2 imgfile=/volumio_current.sqsh" >> ./${P}/boot/a
   ;;
 esac
 
+case $P in
+'orangepilite' | 'orangepione' )
+  sed -i "s/ analog-codec//" ./${P}/boot/armbianEnv.txt
+  ;;
+esac
+
 rm $P.tar.xz
 tar cJf $P.tar.xz $P
